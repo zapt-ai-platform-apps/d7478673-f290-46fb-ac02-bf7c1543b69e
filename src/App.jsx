@@ -13,7 +13,7 @@ function App() {
     try {
       const result = await createEvent('chatgpt_request', {
         prompt: 'Provide an inspiring quote.',
-        response_type: 'text'
+        response_type: 'text',
       });
       setQuote(result.trim());
     } catch (error) {
@@ -27,7 +27,7 @@ function App() {
     setLoadingAudio(true);
     try {
       const result = await createEvent('text_to_speech', {
-        text: quote()
+        text: quote(),
       });
       setAudioUrl(result);
     } catch (error) {
@@ -41,12 +41,12 @@ function App() {
   fetchQuote();
 
   return (
-    <div class="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center p-4">
-      <div class="max-w-xl w-full bg-white p-8 rounded-xl shadow-lg flex flex-col items-center space-y-6">
-        <h1 class="text-2xl font-bold text-purple-600 text-center">Inspiring Quotes</h1>
+    <div class="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 text-gray-800 dark:text-white">
+      <div class="max-w-xl w-full bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg flex flex-col items-center space-y-6 h-full">
+        <h1 class="text-2xl font-bold text-purple-600 dark:text-purple-400 text-center">Inspiring Quotes</h1>
         <div class="text-center">
-          <Show when={!loadingQuote()} fallback={<p class="text-gray-500">Loading quote...</p>}>
-            <p class="text-lg text-gray-800 mb-4">{quote()}</p>
+          <Show when={!loadingQuote()} fallback={<p class="text-gray-500 dark:text-gray-400">Loading quote...</p>}>
+            <p class="text-lg mb-4">{quote()}</p>
           </Show>
         </div>
         <div class="flex space-x-4">
