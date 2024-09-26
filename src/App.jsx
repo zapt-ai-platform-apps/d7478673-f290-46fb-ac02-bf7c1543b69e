@@ -41,18 +41,20 @@ function App() {
   fetchQuote();
 
   return (
-    <div class="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 text-gray-800 dark:text-white">
+    <div class="min-h-screen bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 animate-gradient-x flex items-center justify-center p-4 text-gray-800 dark:text-white bg-[400%_400%]">
       <div class="max-w-xl w-full bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg flex flex-col items-center space-y-6 h-full">
-        <h1 class="text-2xl font-bold text-purple-600 dark:text-purple-400 text-center">Inspiring Quotes</h1>
+        <h1 class="text-3xl font-extrabold text-purple-600 dark:text-purple-400 text-center">Inspiring Quotes</h1>
         <div class="text-center">
           <Show when={!loadingQuote()} fallback={<p class="text-gray-500 dark:text-gray-400">Loading quote...</p>}>
-            <p class="text-lg mb-4">{quote()}</p>
+            <p class="text-3xl font-bold mb-4 animate-fade-in text-center text-shadow">{quote()}</p>
           </Show>
         </div>
         <div class="flex space-x-4">
           <button
             onClick={fetchQuote}
-            class={`px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${loadingQuote() ? 'opacity-50 cursor-not-allowed' : ''}`}
+            class={`px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${
+              loadingQuote() || loadingAudio() ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
             disabled={loadingQuote() || loadingAudio()}
           >
             <Show when={loadingQuote()}>Loading...</Show>
@@ -60,7 +62,9 @@ function App() {
           </button>
           <button
             onClick={getAudio}
-            class={`px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${loadingAudio() ? 'opacity-50 cursor-not-allowed' : ''}`}
+            class={`px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${
+              loadingAudio() || loadingQuote() || !quote() ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
             disabled={loadingAudio() || loadingQuote() || !quote()}
           >
             <Show when={loadingAudio()}>Loading...</Show>
